@@ -1,0 +1,21 @@
+{
+  "name": "gist-crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yang-wei <yangweilim21@gmail.com> (http://yangweilim.com)",
+  "license": "ISC",
+  "dependencies": {
+    "asyncawait": "^1.0.6",
+    "bull": "^1.0.0",
+    "momentjs": "^1.1.15",
+    "mysql": "^2.11.1",
+    "node-fetch": "^1.6.0",
+    "object-assign": "^4.1.0",
+    "ramda": "^0.22.1",
+    "x-ray": "^2.3.0"
+  }
+}
