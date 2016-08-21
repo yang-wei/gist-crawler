@@ -21,10 +21,6 @@ const fetch = function(url, handler) {
         return res.json(); 
     })
     .then(body => {
-      console.log('Get user gists result', body);
-      if (body.length === 0) {
-        handler(body)
-      };
       handler(body);
     })
     .catch(error => {
