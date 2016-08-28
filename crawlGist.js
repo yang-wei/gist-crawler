@@ -4,6 +4,9 @@ const R = require('ramda');
 const h = require('./helper');
 
 const gistFormatter = function(obj) {
+  if (!obj['gist_id') {
+    return []; 
+  }
   const data = [
     obj['gist_id'],
     obj['gist_url'],
