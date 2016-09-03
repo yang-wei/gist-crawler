@@ -10,7 +10,6 @@ const rollbar = require('rollbar');
 
 if (process.env.NODE_ENV === 'production') {
   rollbar.init(rollbarToken);
-  rollbar.reportMessage('Starting rollbar monitoting');
 }
 
 userQueue.process(function(job, done){
