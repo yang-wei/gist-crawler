@@ -13,6 +13,10 @@ const fetch = function(url, handler) {
   console.log("Get user gist: " + url);
   got(url, github_token)
     .then(res => {
+      if (res.status === 404) {
+        handler([]);
+      }
+
        const link = res.headers.get('link');
         if (link) {
           const { next } = getPageLinks(link);
@@ -24,7 +28,7 @@ const fetch = function(url, handler) {
       handler(body);
     })
     .catch(error => {
-      console.log(error.response.body); 
+      handler(error.response.body);
     });
 }
 
