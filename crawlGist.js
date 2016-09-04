@@ -2,6 +2,7 @@ const Xray = require('x-ray');
 const assign = require('object-assign');
 const R = require('ramda');
 const h = require('./helper');
+const logger = require('./logger').logger;
 
 const gistFormatter = function(obj) {
   if (!obj['gist_id']) {
@@ -49,7 +50,7 @@ const crawlGist = function(url, handler)  {
       updated_at: '.gist-timestamp > time-ago@datetime'
   })(function (err, obj) {
     if(err) {
-      console.log('Crawl gist error: ', err);
+      logger.info('Crawl gist error: ' + err);
       handler(err); 
     }
     handler(obj);

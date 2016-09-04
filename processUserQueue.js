@@ -4,13 +4,7 @@ const getUsers = require('./getUsers');
 const getUserGists = require('./getUserGists');
 const crawlGist = require('./crawlGist');
 const R = require('ramda');
-
-const rollbarToken = require('./credentials/rollbar.json').token;
-const rollbar = require('rollbar');
-
-if (process.env.NODE_ENV === 'production') {
-  rollbar.init(rollbarToken);
-}
+const logger = require('./logger').logger;
 
 userQueue.process(function(job, done){
   const username = job.data;
@@ -25,7 +19,7 @@ userQueue.process(function(job, done){
 
   const getUserGistsAndCrawl = getUserGists((gists) => {
     if(gists.length === 0) {
-      console.log(`User ${username} has no gists`);
+      logger.info(`User ${username} has no gists`);
       done(); 
     }
     gists.forEach(crawlGistAndInsert);

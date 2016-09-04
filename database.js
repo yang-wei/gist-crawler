@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const mysqlConfig = require('./credentials/mysql.json');
+const logger = require('./logger').logger;
 
 const connection = mysql.createConnection(mysqlConfig); 
 
@@ -7,7 +8,7 @@ const insertGist = (cb) => (data) => {
   if (!data || data === []) {
     cb(null);
   }
-  console.log("Inserting gist", JSON.stringify(data));
+  logger.info("Inserting gist: " + JSON.stringify(data));
   const sql = "INSERT INTO github_gist (gist_id, gist_url, description, author, author_id, stars, files, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
   connection.query(sql, data, function(err, rows) {
     err ? cb(err) : cb(null, data);

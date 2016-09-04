@@ -2,6 +2,7 @@ const R = require('ramda');
 
 const getPageLinks = require('./helper').getPageLinks;
 const got = require('./helper').fetchGithubApi;
+const logger = require('./logger').logger;
 
 const userGists = function(username) {
   return `https://api.github.com/users/${username}/gists?per_page=100`;  
@@ -10,7 +11,7 @@ const userGists = function(username) {
 const github_token = require('./credentials/token.json').user_gists_token;
 
 const fetch = function(url, handler) {
-  console.log("Get user gist: " + url);
+  logger.info("Get user gist: " + url);
   got(url, github_token)
     .then(res => {
       if (res.status === 404) {

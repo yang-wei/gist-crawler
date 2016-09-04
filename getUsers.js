@@ -2,6 +2,7 @@ const R = require('ramda');
 
 const got = require('./helper').fetchGithubApi;
 const getPageLinks = require('./helper').getPageLinks;
+const logger = require('./logger').logger;
 
 const github_token = require('./credentials/token.json').users_token;
 
@@ -10,7 +11,7 @@ const usersUrl = function(since) {
 }
 
 const log = item => {
-  console.log(item);
+  logger.info(item);
   return item;
 }
   
@@ -21,7 +22,7 @@ const mapUser = function(users) {
 }
 
 const fetch = function(url, cb)  {
-  console.log("Get users: " + url);
+  logger.info("Get users: " + url);
   got(url, github_token)
     .then(res => {
       const link = res.headers.get('link');
@@ -39,7 +40,7 @@ const fetch = function(url, cb)  {
       cb(body);
     })
     .catch(error => {
-      console.log(error.response.body); 
+      logger.warn(error.response.body); 
     });
 }
 

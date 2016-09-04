@@ -1,6 +1,7 @@
 const d = require('./database');
 const getUsers = require('./getUsers');
 const userQueue = require('./userQueue');
+const logger = require('./logger').logger;
 
 const getUsersAndAddToQueue = getUsers((users) => {
   users.forEach(username => userQueue.add(username));
@@ -8,9 +9,9 @@ const getUsersAndAddToQueue = getUsers((users) => {
 
 const start = function(err, id) {
   if(err) {
-    console.log(`failed query: ${err}`);
+    logger.info(`failed query: ${err}`);
   }
-  console.log("Start from " + id);
+  logger.info("Start from " + id);
   getUsersAndAddToQueue(id);
 }
 
