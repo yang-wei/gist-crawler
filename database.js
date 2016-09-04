@@ -5,7 +5,7 @@ const logger = require('./logger').logger;
 const connection = mysql.createConnection(mysqlConfig); 
 
 const insertGist = (cb) => (data) => {
-  if (!data || data === []) {
+  if (!data || data.length === 0) {
     cb(null);
   }
   logger.info("Inserting gist: " + JSON.stringify(data));
