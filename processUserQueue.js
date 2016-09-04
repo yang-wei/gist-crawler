@@ -18,9 +18,9 @@ userQueue.process(function(job, done){
   const crawlGistAndInsert = crawlGist(insertGistAndLog);
 
   const getUserGistsAndCrawl = getUserGists((gists) => {
-    if(gists.length === 0) {
+    if (gists.length === 0) {
       logger.info(`User ${username} has no gists`);
-      done(); 
+      done(null, true);
     }
     gists.forEach(crawlGistAndInsert);
   });
